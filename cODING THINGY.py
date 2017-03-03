@@ -1,4 +1,6 @@
 import random
+#there is a problem here |
+#                        V
 def cbase(x): #must have three digits
     places = []
     n = 0
@@ -8,21 +10,22 @@ def cbase(x): #must have three digits
     places = list(reversed(places))
     num = ''
     placeIndex = 0
-   #print places
+    #print places
     while x > 0:
         #print x
         i=0
         place = places[placeIndex]
         while i < 7:
-            #print x-place*i, i
+            #print x-place*i, i, place
             if x - place*i < place:
                 num += str(i)
                 x-=place*i
                 placeIndex += 1
+                #i+= 1
                 break
             #x -= place*i
             i += 1
-    num = '0'*(3-len(num)) + num
+    num += '0'*(3-len(num))# + num
     return num
         
 zeroes = list('X~CBV')
@@ -84,7 +87,7 @@ def decode(message):
     decodeddd = ''
     for num in decodedList:
         decodeddd += chr(int(num, 7))
-    return decodeddd
+    return decodeddd.replace('\xe0', ' ')
     
     #figure out which list it's in
     #transform to number
