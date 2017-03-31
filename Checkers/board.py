@@ -74,24 +74,26 @@ class board(object):
             x = p.x
             y = p.y + direction
             for i in ((x+1, y), (x-1, y)):
-                if i in clear: yield i
-                    
+                if i in clear: yield i                    
         #after a peice is known to be able to jump, check how many times it can jump, and go with that move.
         #Unless we want to make it spectatcularly awful, in which case don't do that
-        def checkKill(enemy, p, direction):
+        def checkKill(enemy, clear, p, direction):
+            #finds every space on the board that can be jumped to from current position, assuming only foreward moves
+            def tree(x, y):
+                height = levels = 0
+                while height < 8:
+                    yield 
             x = p.x
             y = p.y+direction+direction
-            for i in ((x+2, y), (x-2, y)):
-                if i in clear:
+            for i, j in zip(((x+2, y), (x-2, y)), ((x+1, y-direction), (x-1, y-direction))):
+                jumps = 0
+                while i in clear and j in enemy: #can jump
                     newP = piece(p.x, p.y + direction*2, p.value)
-                    if checkClear(clear, newP, direction):
-        #might reorganize to return tuple of normal and king moves, but for now is generator and switches silently (could also just switch noise). see move class
-        #normal moves (no jumping):
-        for p in self.normal[player-1]:
-            
+                    jump += 1
+                    i = 
     
 '''
-def my_ai(boasrd)
+def my_ai(board)
 return move (peice, target)
 
 board is 2d array of ints
